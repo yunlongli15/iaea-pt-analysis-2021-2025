@@ -1,0 +1,12 @@
+.claude/
+__pycache__/
+*.pyc
+.DS_Store
+paper/main.pdf
+paper/*.aux
+paper/*.log
+paper/*.bbl
+paper/*.blg
+paper/*.out
+paper/*.toc
+paper/

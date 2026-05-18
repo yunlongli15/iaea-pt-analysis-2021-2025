@@ -1,0 +1,48 @@
+﻿Project,Status,Score,A_Rate,Participants,File
+3-516 K-40 Soil,Not Participated,N/A,N/A,N/A,047_Labcode_3-516_K-40_Soil.xlsx
+Cs-137 Gamma Soil,Not Participated,N/A,N/A,N/A,028_Labcode_1-512_Cs-137_Gamma_Soil.xlsx
+Pa-234m Gamma Sediment,Not Participated,N/A,N/A,N/A,025_Labcode_14-507_Pa-234m_Gamma_Sediment.xlsx
+Pa-234m Gamma Soil,Not Participated,N/A,N/A,N/A,040_Labcode_14-507_Pa-234m_Gamma_Soil.xlsx
+Pb-210 Gamma Sediment,Not Participated,N/A,N/A,N/A,020_Labcode_3-508_Pb-210_Gamma_Sediment.xlsx
+Pb-210 Gamma Soil,Not Participated,N/A,N/A,N/A,035_Labcode_2-508_Pb-210_Gamma_Soil.xlsx
+Pb-210 Gamma Water,Not Participated,N/A,N/A,N/A,003_Labcode_2-508_Pb-210_Gamma_Water.xlsx
+Ra-228 Gamma Sediment,Not Participated,N/A,N/A,N/A,016_Labcode_6-509_Ra-228_Gamma_Sediment.xlsx
+Ra-228 Gamma Soil,Not Participated,N/A,N/A,N/A,030_Labcode_2-509_Ra-228_Gamma_Soil.xlsx
+Th-232 Gamma Sediment,Not Participated,N/A,N/A,N/A,017_Labcode_9-506_Th-232_Gamma_Sediment.xlsx
+Th-232 Gamma Soil,Not Participated,N/A,N/A,N/A,029_Labcode_2-506_Th-232_Gamma_Soil.xlsx
+U-235 Gamma Sediment,Not Participated,N/A,N/A,N/A,026_Labcode_14-512_U-235_Gamma_Sediment.xlsx
+U-235 Gamma Soil,Not Participated,N/A,N/A,N/A,041_Labcode_2-512_U-235_Gamma_Soil.xlsx
+U-238 Gamma Sediment,Not Participated,N/A,N/A,N/A,019_Labcode_3-516_U-238_Gamma_Sediment.xlsx
+U-238 Gamma Soil,Not Participated,N/A,N/A,N/A,034_Labcode_2-516_U-238_Gamma_Soil.xlsx
+Ac-228 Gamma Sediment,Passed,A,N/A,292,015_Labcode_1-516_Ac-228_Gamma_Sediment.xlsx
+Ac-228 Gamma Soil,Passed,A,N/A,294,031_Labcode_1-516_Ac-228_Gamma_Soil.xlsx
+Bi-212 Gamma Sediment,Passed,A,N/A,205,013_Labcode_5-515_Bi-212_Gamma_Sediment.xlsx
+Bi-212 Gamma Soil,Passed,A,N/A,200,042_Labcode_5-515_Bi-212_Gamma_Soil.xlsx
+Bi-214 Gamma Sediment,Passed,A,N/A,260,027_Labcode_1-515_Bi-214_Gamma_Sediment.xlsx
+Bi-214 Gamma Soil,Passed,A,N/A,264,036_Labcode_1-515_Bi-214_Gamma_Soil.xlsx
+Cs-134 Gamma Surface,Passed,A,N/A,339,043_Labcode_2-516_Cs-134_Gamma_Surface.xlsx
+Eu-152 Gamma Water,Passed,A,N/A,382,001_Labcode_2-516_Eu-152_Gamma_Water.xlsx
+Gross Alpha Water,Passed,A,N/A,234,045_Labcode_2-512_Gross_Alpha_Water.xlsx
+Gross Beta Water,Passed,A,N/A,241,046_Labcode_1-512_Gross_Beta_Water.xlsx
+H-3 Beta Water,Passed,A,N/A,198,008_Labcode_1-507_H-3_Beta_Water.xlsx
+K-40 Gamma Sediment,Passed,A,N/A,381,021_Labcode_1-516_K-40_Gamma_Sediment.xlsx
+Na-22 Gamma Water,Passed,A,N/A,353,010_Labcode_1-515_Na-22_Gamma_Water.xlsx
+Pb-212 Gamma Sediment,Passed,A,N/A,269,014_Labcode_3-515_Pb-212_Gamma_Sediment.xlsx
+Pb-212 Gamma Soil,Passed,A,N/A,270,032_Labcode_2-515_Pb-212_Gamma_Soil.xlsx
+Pb-214 Gamma Sediment,Passed,A,N/A,256,022_Labcode_3-515_Pb-214_Gamma_Sediment.xlsx
+Pb-214 Gamma Soil,Passed,A,N/A,261,037_Labcode_2-515_Pb-214_Gamma_Soil.xlsx
+Po-210 Alpha Water,Passed,A,N/A,77,002_Labcode_2-506_Po-210_Alpha_Water.xlsx
+Po-210 Alpha Water,Passed,A,N/A,60,004_Labcode_5-445_Po-210_Alpha_Water.xlsx
+Ra-226 Alpha Water,Passed,A,N/A,107,011_Labcode_2-487_Ra-226_Alpha_Water.xlsx
+Ra-226 Alpha Water,Passed,A,N/A,133,012_Labcode_2-515_Ra-226_Alpha_Water.xlsx
+Ra-226 Gamma Sediment,Passed,A,N/A,279,023_Labcode_3-515_Ra-226_Gamma_Sediment.xlsx
+Ra-226 Gamma Soil,Passed,A,N/A,275,038_Labcode_2-515_Ra-226_Gamma_Soil.xlsx
+Sr-90 Beta SurFace,Passed,A,N/A,197,044_Labcode_2-514_Sr-90_Beta_SurFace.xlsx
+Sr-90 Beta Water,Passed,A,N/A,192,009_Labcode_3-507_Sr-90_Beta_Water.xlsx
+Th-234 Gamma Sediment,Passed,A,N/A,138,024_Labcode_5-515_Th-234_Gamma_Sediment.xlsx
+Th-234 Gamma Soil,Passed,A,N/A,144,039_Labcode_2-515_Th-234_Gamma_Soil.xlsx
+Tl-208 Gamma Sediment,Passed,A,N/A,233,018_Labcode_3-516_Tl-208_Gamma_Sediment.xlsx
+Tl-208 Gamma Soil,Passed,A,N/A,231,033_Labcode_2-516_Tl-208_Gamma_Soil.xlsx
+U ICP-MS Water,Passed,A,N/A,76,005_Labcode_3-484_Total_U_ICP-MS_Water.xlsx
+U-235 ICP-MS Water,Passed,A,N/A,60,006_Labcode_3-446_U-235_ICP-MS_Water.xlsx
+U-235 ICP-MS Water,Passed,A,N/A,72,007_Labcode_3-484_U-235_ICP-MS_Water.xlsx
