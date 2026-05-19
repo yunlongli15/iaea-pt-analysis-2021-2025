@@ -39,10 +39,10 @@ def _add_legend(ax):
     legend_elements = [
         Line2D([0], [0], marker='D', color='w', markerfacecolor='#E91E63',
                markersize=8, label='Our lab'),
-        Line2D([0], [0], marker='o', color='w', markerfacecolor='#90A4AE',
-               markersize=6, alpha=0.5, label='Other labs'),
-        Line2D([0], [0], marker='|', color='w', markerfacecolor='#333333',
-               markersize=8, label='Mean'),
+        Line2D([0], [0], marker='o', color='w', markerfacecolor='#546E7A',
+               markersize=6, label='Other labs'),
+        Line2D([0], [0], marker='|', color='#333333', markeredgecolor='#333333',
+               markersize=8, markeredgewidth=2, label='Mean'),
         Line2D([0], [0], color='red', lw=1.2, label='Ref. value (bias=0)'),
     ]
     ax.legend(handles=legend_elements, fontsize=7, loc='upper right')
@@ -55,31 +55,51 @@ def plot_single_year(df, year, save=True):
     lc = get_our_labcode(year)
     dy_all = df[(df['year'] == year) & (df['rel_bias'].notna())]
 
+    # Only projects our lab participated in
+    our_projects = dy_all[dy_all['labcode'] == lc]['project'].unique()
+    dy_all = dy_all[dy_all['project'].isin(our_projects)]
+
     # Plot only data within ±100% for visual clarity
     dy = dy_all[dy_all['rel_bias'].abs() <= 100]
 
     if len(dy) == 0:
         return
 
-    projects = sorted(dy['project'].unique())
+    # Sort projects by our lab's |relative bias| (best first)
+    proj_order = []
+    for proj in dy['project'].unique():
+        proj_data = dy[dy['project'] == proj]
+        our_row = proj_data[proj_data['labcode'] == lc]
+        if len(our_row) > 0:
+            our_abs = abs(our_row['rel_bias'].values[0])
+            n_total = len(proj_data['rel_bias'].dropna())
+            rank = (proj_data['rel_bias'].abs() < our_abs).sum() + 1
+            proj_order.append((proj, our_abs, rank, n_total))
+    proj_order.sort(key=lambda x: x[1], reverse=True)  # largest |bias| at top
+    projects = [p[0] for p in proj_order]
     n = len(projects)
 
-    fig, ax = plt.subplots(figsize=(12, max(6, n * 0.26)))
+    fig, ax = plt.subplots(figsize=(13, max(6, n * 0.26)))
 
-    for i, proj in enumerate(projects):
+    for i, (proj, our_abs, rank, n_total) in enumerate(proj_order):
         pd_data = dy[dy['project'] == proj]
         biases = pd_data['rel_bias'].dropna().values
-        our_row = pd_data[pd_data['labcode'] == lc]
-        our_bias = our_row['rel_bias'].values[0] if len(our_row) > 0 else np.nan
 
         jitter = np.random.normal(0, 0.08, len(biases))
-        ax.scatter(biases, np.full(len(biases), i) + jitter, alpha=0.4, s=18,
-                   color='#90A4AE', edgecolors='none', zorder=2)
+        ax.scatter(biases, np.full(len(biases), i) + jitter, alpha=0.35, s=18,
+                   color='#546E7A', edgecolors='none', zorder=2)
         mean_bias = np.mean(biases)
         ax.scatter(mean_bias, i, marker='|', s=100, color='#333333', zorder=4, linewidths=1.5)
-        if not np.isnan(our_bias):
-            ax.scatter(our_bias, i, s=70, color='#E91E63', marker='D',
-                       edgecolors='white', linewidth=1, zorder=5)
+        # Our lab
+        our_bias = biases[0] if len(pd_data[pd_data['labcode'] == lc]) > 0 else None
+        # Actually get our specific bias properly
+        our_row = pd_data[pd_data['labcode'] == lc]
+        our_bias = our_row['rel_bias'].values[0] if len(our_row) > 0 else np.nan
+        ax.scatter(our_bias, i, s=70, color='#E91E63', marker='D',
+                   edgecolors='white', linewidth=1, zorder=5)
+        # Rank annotation on the right
+        ax.text(1.02, i, f'#{rank}/{n_total}', transform=ax.get_yaxis_transform(),
+                va='center', fontsize=6.5, color='#555')
 
     ax.set_yticks(range(n))
     ax.set_yticklabels([_strip_prefix(p) for p in projects], fontsize=7)
