@@ -123,14 +123,39 @@ def load_single_file(filepath, year, keep_prefix=True):
     return result
 
 
+def load_marbs(year):
+    """Load MARB values for a year. Returns dict: project_name -> MARB (in %)."""
+    folder = os.path.join(BASE_DIR, f'merged_labcode_tables_{year}')
+    marb_path = os.path.join(folder, 'MARB.xlsx')
+    if not os.path.exists(marb_path):
+        return {}
+
+    marb_df = pd.read_excel(marb_path, header=None)
+    marb_values = marb_df.iloc[:, 0].values  # single column
+
+    # Get sorted project files (same order as load_year) to match MARB rows
+    files = sorted(glob.glob(os.path.join(folder, '*.xlsx')))
+    files = [f for f in files if '~$' not in f and 'MARB' not in os.path.basename(f)]
+
+    marb_map = {}
+    for i, f in enumerate(files):
+        if i < len(marb_values):
+            proj_name = parse_project_name(f, keep_prefix=True)
+            marb_map[proj_name] = float(marb_values[i])
+    return marb_map
+
+
 def load_year(year, keep_prefix=True):
     """Load all files for a given year, return combined DataFrame."""
     folder = os.path.join(BASE_DIR, f'merged_labcode_tables_{year}')
     if not os.path.exists(folder):
         raise FileNotFoundError(f'Folder not found: {folder}')
 
+    # Load MARB values first
+    marb_map = load_marbs(year)
+
     files = sorted(glob.glob(os.path.join(folder, '*.xlsx')))
-    files = [f for f in files if '~$' not in f]
+    files = [f for f in files if '~$' not in f and 'MARB' not in os.path.basename(f)]
 
     dfs = []
     for f in files:
@@ -139,6 +164,10 @@ def load_year(year, keep_prefix=True):
             dfs.append(df)
 
     result = pd.concat(dfs, ignore_index=True)
+    # Attach MARB and weight to each project
+    result['marb'] = result['project'].map(marb_map)
+    result['rdi_weight'] = 1.2 / (1 + result['marb'] / 100)
+
     # Deduplicate: keep first occurrence of each labcode-project-year combination
     n_before = len(result)
     result = result.drop_duplicates(subset=['labcode', 'project', 'year'], keep='first')

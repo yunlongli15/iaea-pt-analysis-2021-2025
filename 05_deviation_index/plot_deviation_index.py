@@ -1,9 +1,9 @@
 """
-Analysis 5: Result deviation index (RDI) scatter plots — per year.
-RDI = mean of |relative bias| for a lab in a given year.
-Y-axis: RDI value per lab.
-X-axis: lab codes, sorted by RDI descending.
-Our lab highlighted in red.
+Analysis 5: Result Deviation Index (RDI) scatter plots — per year.
+
+Weighted RDI = (1/K) * sum |rel_bias_k| * w_k
+where w_k = 1.2 / (1 + MARB_k/100), MARB = Maximum Acceptable Relative Bias.
+This down-weights projects with inherently high uncertainty (e.g., low activity).
 """
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'utils'))
@@ -27,12 +27,16 @@ plt.rcParams.update({
 def plot_year_rdi(df, year, save=True):
     """Scatter plot: each lab's RDI, sorted by RDI value."""
     lc_our = get_our_labcode(year)
-    dy = df[df['year'] == year].dropna(subset=['rel_bias'])
+    dy = df[df['year'] == year].dropna(subset=['rel_bias']).copy()
+    # Weighted absolute bias: w_k = 1.2 / (1 + MARB/100), default weight=1.0
+    dy['rdi_weight'] = dy['rdi_weight'].fillna(1.0)
+    dy['weighted_abs_bias'] = dy['rel_bias'].abs() * dy['rdi_weight']
 
     # RDI stats use full data (ranks must be accurate)
     rdi_stats = dy.groupby('labcode').agg(
         n_projects=('rel_bias', 'count'),
-        rdi=('rel_bias', lambda x: x.abs().mean()),
+        rdi=('weighted_abs_bias', 'mean'),
+        rdi_raw=('rel_bias', lambda x: x.abs().mean()),
         median_abs_bias=('rel_bias', lambda x: x.abs().median()),
     ).reset_index()
     rdi_stats = rdi_stats.sort_values('rdi', ascending=True).reset_index(drop=True)
@@ -180,16 +184,19 @@ def main():
         our = rdi_stats[rdi_stats['labcode'] == lc]
         if len(our) > 0:
             r = our.iloc[0]
-            our_dy = df[(df['year'] == year) & (df['labcode'] == lc)].dropna(subset=['rel_bias'])
-            abs_biases = our_dy['rel_bias'].abs()
-            sem = abs_biases.std() / np.sqrt(len(abs_biases)) if len(abs_biases) > 1 else 0
+            our_dy = df[(df['year'] == year) & (df['labcode'] == lc)].dropna(subset=['rel_bias']).copy()
+            our_dy['rdi_weight'] = our_dy['rdi_weight'].fillna(1.0)
+            weighted_abs = our_dy['rel_bias'].abs() * our_dy['rdi_weight']
+            w_rdi = weighted_abs.mean()
+            sem = weighted_abs.std() / np.sqrt(len(weighted_abs)) if len(weighted_abs) > 1 else 0
             rdi_summary.append({
-                'year': year, 'our_labcode': lc, 'n_projects': len(abs_biases),
-                'rdi': abs_biases.mean(), 'sem': sem,
-                'median_abs_bias': abs_biases.median(),
+                'year': year, 'our_labcode': lc, 'n_projects': len(weighted_abs),
+                'rdi': w_rdi, 'rdi_raw': our_dy['rel_bias'].abs().mean(),
+                'sem': sem,
+                'median_abs_bias': our_dy['rel_bias'].abs().median(),
                 'rank': int(r['rank']), 'n_labs': len(rdi_stats),
             })
-            print(f'  {year}: #{int(r["rank"])}/{len(rdi_stats)} rank, RDI={abs_biases.mean():.2f}%')
+            print(f'  {year}: #{int(r["rank"])}/{len(rdi_stats)} rank, RDI={w_rdi:.2f}% (raw={our_dy["rel_bias"].abs().mean():.2f}%)')
 
     rdi_df = pd.DataFrame(rdi_summary)
     rdi_df.to_csv(os.path.join(OUTPUT_DIR, 'rdi_summary.csv'), index=False)
