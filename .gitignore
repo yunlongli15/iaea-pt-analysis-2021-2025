@@ -1,15 +1,30 @@
-.claude/
-__pycache__/
-*.pyc
+# Build artifacts
+ppt/presentation.aux
+ppt/presentation.log
+ppt/presentation.nav
+ppt/presentation.out
+ppt/presentation.snm
+ppt/presentation.toc
+ppt/presentation.pdf
+
+# Paper PDF outputs
+paper/*.pdf
+
+# PPT / presentation files (not source)
+ppt/*.pdf
+ppt/*.pptx
+ppt/*.ppt
+ppt/*.docx
+ppt/*.jpeg
+ppt/*.png
+ppt/*.jpg
+
+# Temp files
+*~
+~$*
+*.swp
 .DS_Store
-paper/main.pdf
-paper/*.aux
-paper/*.log
-paper/*.bbl
-paper/*.blg
-paper/*.out
-paper/*.toc
-paper/
-IAEA结果分析/
-IAEA-proficiency-tests-for-determination-of-radio_2017_Applied-Radiation-and.pdf
-IAEA结果分析报告 v2.docx
+__pycache__/
+
+# Deprecated
+IAEA结果分析/deprecated/
