@@ -134,16 +134,19 @@ def plot_rdi_trend(yearly_data, our_rdi_df, save=True):
 
 
 def plot_rdi_ranking(df, save=True):
-    """Our lab's RDI rank among all labs."""
+    """Our lab's weighted RDI rank among all labs."""
     fig, ax = plt.subplots(figsize=(8, 5))
     years = [2021, 2022, 2023, 2024, 2025]
     our_ranks = []
 
     for year in years:
         lc = get_our_labcode(year)
-        dy = df[df['year'] == year].dropna(subset=['rel_bias'])
-        rdi_by_lab = dy.groupby('labcode')['rel_bias'].apply(lambda x: x.abs().mean()).sort_values()
-        our_rdi = dy[dy['labcode'] == lc]['rel_bias'].abs().mean()
+        dy = df[df['year'] == year].dropna(subset=['rel_bias']).copy()
+        # Weighted RDI
+        dy['rdi_weight'] = dy['rdi_weight'].fillna(1.0)
+        dy['weighted_abs_bias'] = dy['rel_bias'].abs() * dy['rdi_weight']
+        rdi_by_lab = dy.groupby('labcode')['weighted_abs_bias'].mean().sort_values()
+        our_rdi = dy[dy['labcode'] == lc]['weighted_abs_bias'].mean()
         rank = (rdi_by_lab < our_rdi).sum() + 1
         our_ranks.append({'year': year, 'rank': rank, 'n_labs': len(rdi_by_lab)})
 

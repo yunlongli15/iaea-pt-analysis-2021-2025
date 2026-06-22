@@ -109,15 +109,31 @@ def plot_all_years_overview(yearly_data, save=True):
     """Combined overview: difficulty distribution per year as boxplot + scatter."""
     fig, axes = plt.subplots(1, 2, figsize=(14, 6))
 
-    # Boxplot
+    # Boxplot with jittered project points
     ax = axes[0]
     years = sorted(yearly_data.keys())
     data = [yearly_data[y]['difficulty'].values for y in years]
     bp = ax.boxplot(data, tick_labels=[str(y) for y in years], patch_artist=True,
-                    widths=0.5)
+                    widths=0.5, zorder=2)
     for patch, y in zip(bp['boxes'], years):
         patch.set_facecolor(YEAR_COLORS.get(y, '#cccccc'))
-        patch.set_alpha(0.7)
+        patch.set_alpha(0.45)
+    # Jittered individual project points
+    for i, y in enumerate(years):
+        vals = data[i]
+        if len(vals) > 0:
+            jitter = np.random.normal(0, 0.06, len(vals))
+            ax.scatter(np.full(len(vals), i + 1) + jitter, vals, alpha=0.55, s=22,
+                       color=YEAR_COLORS.get(y, '#333'), edgecolors='white',
+                       linewidth=0.3, zorder=4)
+    # Annotate mean + count per year
+    for i, y in enumerate(years):
+        vals = data[i]
+        mean_val = np.mean(vals)
+        ax.annotate(f'mean={mean_val:.3f}\nn={len(vals)}',
+                    (i + 1 + 0.25, mean_val), textcoords="offset points",
+                    xytext=(6, 0), ha='left', va='center', fontsize=7,
+                    color='#333')
     ax.set_ylabel('Difficulty Coefficient')
     ax.set_ylim(-0.05, 1.1)
     ax.grid(axis='y', alpha=0.3)

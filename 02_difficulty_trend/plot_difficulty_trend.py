@@ -34,7 +34,7 @@ def compute_difficulty_series(df):
     """Compute difficulty for each project_core-year combination.
     Difficulty = 1 - N_pass / N_all_labs_in_year (global denominator).
     Pass rate = N_pass / N_labs_in_project (project-specific denominator).
-    Water1/Water2/Water3 variants are merged by averaging their difficulty.
+    Water1/Water2/Water3 variants are merged by n_total-weighted average.
     """
     n_all_labs_per_year = df.groupby('year')['labcode'].nunique()
 
@@ -52,14 +52,20 @@ def compute_difficulty_series(df):
     g['pass_rate'] = g['n_pass'] / g['n_total']
     g['project_base'] = g['project_core'].apply(_normalize_core)
 
-    # Step 2: merge variants by averaging difficulty and summing counts
+    # Step 2: merge variants by n_total-weighted average of difficulty and pass rate,
+    # summing n_total and n_pass
+    g['diff_x_n'] = g['difficulty'] * g['n_total']
+    g['pr_x_n'] = g['pass_rate'] * g['n_total']
     merged = g.groupby(['project_base', 'year']).agg(
-        difficulty=('difficulty', 'mean'),
-        pass_rate=('pass_rate', 'mean'),
+        diff_x_n=('diff_x_n', 'sum'),
+        pr_x_n=('pr_x_n', 'sum'),
         n_total=('n_total', 'sum'),
         n_pass=('n_pass', 'sum'),
         n_all_labs=('n_all_labs', 'first'),
     ).reset_index()
+    merged['difficulty'] = merged['diff_x_n'] / merged['n_total']
+    merged['pass_rate'] = merged['pr_x_n'] / merged['n_total']
+    merged = merged.drop(columns=['diff_x_n', 'pr_x_n'])
     merged = merged.rename(columns={'project_base': 'project'})
     return merged
 
