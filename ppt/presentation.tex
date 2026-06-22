@@ -202,29 +202,26 @@
 % ===== SLIDE 7a: Bullet 1 —— 水中人工核素 (bars 1-5, top) =====
 \begin{frame}{维度1：项目难度系数与通过率}
   \begin{columns}
-    \begin{column}{0.33\textwidth}
+    \begin{column}{0.43\textwidth}
       \small
       \begin{block}{\small 难度系数和通过率}
         \textbf{难度系数} $D_{j,y} = 1 - N^{(A)}_{j,y} / N^{\text{(all labs)}}_y$\\[1pt]
         \textbf{通过率} $P_{j,y} = N^{(A)}_{j,y} / N^{\text{(in project)}}_j$
       \end{block}
-      \vspace{0.3cm}
       \begin{tightitemize}
         \item \textcolor{red}{水中人工放射性核素}难度\textbf{最低}、通过率最高
         \item Co-60, Cs-137, Cs-134, Ba-133, Na-22
-        \item $\to$ 活度较高，$\gamma$能谱法成熟
+        \item  活度较高，$\gamma$能谱法成熟
       \end{tightitemize}
     \end{column}
-    \begin{column}{0.67\textwidth}
+    \begin{column}{0.57\textwidth}
       \begin{tikzpicture}
         \node[anchor=north west, inner sep=0] (fig) at (0,0)
-          {\includegraphics[width=\textwidth,keepaspectratio]{../paper/figures/fig_difficulty_pass_rate_2025.pdf}};
+          {\includegraphics[width=0.68\textwidth,keepaspectratio]{../paper/figures/fig_difficulty_pass_rate_2025.pdf}};
         % Highlight top 5 water bars (ranks 1-5 out of 42, ~top 12% of figure)
         \draw[red, line width=1.8pt, rounded corners=4pt]
-          ([yshift=-0.1cm]fig.north west) rectangle
+          ([yshift=-0.4cm]fig.north west) rectangle
           ([xshift=-0.1cm, yshift=-1.55cm]fig.north east);
-        \node[red, font=\footnotesize\bfseries] at ([xshift=-2.0cm, yshift=-0.8cm]fig.north east)
-          {Co, Cs, Ba, Na (水)};
       \end{tikzpicture}
     \end{column}
   \end{columns}
@@ -233,29 +230,32 @@
 % ===== SLIDE 7b: Bullet 2 —— 天然核素 (scattered in bottom half) =====
 \begin{frame}{维度1：项目难度系数与通过率}
   \begin{columns}
-    \begin{column}{0.33\textwidth}
+    \begin{column}{0.43\textwidth}
       \small
       \begin{block}{\small 难度系数和通过率}
         \textbf{难度系数} $D_{j,y} = 1 - N^{(A)}_{j,y} / N^{\text{(all labs)}}_y$\\[1pt]
         \textbf{通过率} $P_{j,y} = N^{(A)}_{j,y} / N^{\text{(in project)}}_j$
       \end{block}
-      \vspace{0.3cm}
       \begin{tightitemize}
-        \item \textcolor{red}{天然核素 (U同位素)}难度\textbf{最高}、通过率最低
+        \item \textcolor{red}{天然核素 (U同位素)}难度\textbf{最高}、通过率较低
         \item U-238, U-235 ($\alpha$/ICP-MS/$\gamma$)
-        \item $\to$ 活度较低，前处理与测量难度大
+        \item 活度较低，前处理与测量难度大
       \end{tightitemize}
     \end{column}
-    \begin{column}{0.67\textwidth}
+    \begin{column}{0.57\textwidth}
       \begin{tikzpicture}
         \node[anchor=north west, inner sep=0] (fig) at (0,0)
-          {\includegraphics[width=\textwidth,keepaspectratio]{../paper/figures/fig_difficulty_pass_rate_2025.pdf}};
+          {\includegraphics[width=0.68\textwidth,keepaspectratio]{../paper/figures/fig_difficulty_pass_rate_2025.pdf}};
         % Highlight bottom ~40% of figure (uranium isotopes all in bottom half)
         \draw[red, line width=1.8pt, rounded corners=4pt]
-          ([yshift=-2.1cm]fig.north west) rectangle
-          ([xshift=-0.1cm, yshift=-0.1cm]fig.south east);
-        \node[red, font=\footnotesize\bfseries] at ([xshift=-2.5cm, yshift=-2.8cm]fig.north east)
-          {U-238, U-235, Ra-226};
+          ([yshift=-4.8cm]fig.north west) rectangle
+          ([xshift=-0.1cm, yshift=2.1cm]fig.south east);
+        \draw[red, line width=1.8pt, rounded corners=4pt]
+          ([yshift=-5.5cm]fig.north west) rectangle
+          ([xshift=-0.1cm, yshift=1.4cm]fig.south east);
+        \draw[red, line width=1.8pt, rounded corners=4pt]
+          ([yshift=0.9cm]fig.south west) rectangle
+          ([xshift=-0.1cm, yshift=0.65cm]fig.south east);
       \end{tikzpicture}
     \end{column}
   \end{columns}
@@ -264,7 +264,7 @@
 % ===== SLIDE 7c: Bullet 3 —— 植物样 (scattered) =====
 \begin{frame}{维度1：项目难度系数与通过率}
   \begin{columns}
-    \begin{column}{0.33\textwidth}
+    \begin{column}{0.43\textwidth}
       \small
       \begin{block}{\small 难度系数和通过率}
         \textbf{难度系数} $D_{j,y} = 1 - N^{(A)}_{j,y} / N^{\text{(all labs)}}_y$\\[1pt]
@@ -274,24 +274,20 @@
       \begin{tightitemize}
         \item \textcolor{red}{植物样}项目难度高但通过率也高
         \item K-40, Cs-137, Ra-226, Pb-214, Bi-214 (植物)
-        \item $\to$ 前处理复杂，但测量本身较简单
+        \item 前处理复杂，但测量本身较简单
       \end{tightitemize}
     \end{column}
-    \begin{column}{0.67\textwidth}
+    \begin{column}{0.57\textwidth}
       \begin{tikzpicture}
         \node[anchor=north west, inner sep=0] (fig) at (0,0)
-          {\includegraphics[width=\textwidth,keepaspectratio]{../paper/figures/fig_difficulty_pass_rate_2025.pdf}};
+          {\includegraphics[width=0.68\textwidth,keepaspectratio]{../paper/figures/fig_difficulty_pass_rate_2025.pdf}};
         % Plant bars: K-40 Vegetation (~rank 8, upper), plant bars near bottom
         \draw[red, line width=1.8pt, rounded corners=4pt]
-          ([yshift=-1.0cm]fig.north west) rectangle
-          ([xshift=-0.1cm, yshift=-1.35cm]fig.north east);
+          ([yshift=-5.2cm]fig.north west) rectangle
+          ([xshift=-0.1cm, yshift=1.65cm]fig.south east);
         \draw[red, line width=1.8pt, rounded corners=4pt]
-          ([yshift=-2.3cm]fig.north west) rectangle
-          ([xshift=-0.1cm, yshift=-0.1cm]fig.south east);
-        \node[red, font=\footnotesize\bfseries] at ([xshift=-2.2cm, yshift=-1.2cm]fig.north east)
-          {K-40 (植物)};
-        \node[red, font=\footnotesize\bfseries] at ([xshift=-2.8cm, yshift=-2.6cm]fig.north east)
-          {Ra, Pb, Bi, Cs (植物)};
+          ([yshift=-5.78cm]fig.north west) rectangle
+          ([xshift=-0.1cm, yshift=0.85cm]fig.south east);
       \end{tikzpicture}
     \end{column}
   \end{columns}
@@ -300,7 +296,7 @@
 % ===== SLIDE 7d: Bullet 4 —— 衰变链土壤 =====
 \begin{frame}{维度1：项目难度系数与通过率}
   \begin{columns}
-    \begin{column}{0.33\textwidth}
+    \begin{column}{0.43\textwidth}
       \small
       \begin{block}{\small 难度系数和通过率}
         \textbf{难度系数} $D_{j,y} = 1 - N^{(A)}_{j,y} / N^{\text{(all labs)}}_y$\\[1pt]
@@ -310,25 +306,24 @@
       \begin{tightitemize}
         \item \textcolor{red}{土壤中U--Ra衰变链}各项目通过率均较低
         \item U-238 $\to$ Th-234 $\to$ Pa-234m $\to$ \dots $\to$ Ra-226 $\to$ \dots $\to$ Pb-214 $\to$ Bi-214
-        \item $\to$ 未达长期平衡 / 氡气泄漏
+        \item 未达长期平衡或者未密封好导致氡气泄漏
       \end{tightitemize}
     \end{column}
-    \begin{column}{0.67\textwidth}
+    \begin{column}{0.57\textwidth}
       \begin{tikzpicture}
         \node[anchor=north west, inner sep=0] (fig) at (0,0)
-          {\includegraphics[width=\textwidth,keepaspectratio]{../paper/figures/fig_difficulty_pass_rate_2025.pdf}};
+          {\includegraphics[width=0.68\textwidth,keepaspectratio]{../paper/figures/fig_difficulty_pass_rate_2025.pdf}};
         % Decay chain soil bars scattered: U-238,Th-234 soil (~rank 17-18, upper-mid),
         % Pa-234m soil (~rank 40, near bottom), Ra-226,Pb-214,Bi-214 soil (ranks 20-25, mid-lower)
         \draw[red, line width=1.8pt, rounded corners=4pt]
-          ([yshift=-2.1cm]fig.north west) rectangle
-          ([xshift=-0.1cm, yshift=-3.1cm]fig.north east);
+          ([yshift=-3.0cm]fig.north west) rectangle
+          ([xshift=-1.7cm, yshift=3.27cm]fig.south east);
         \draw[red, line width=1.8pt, rounded corners=4pt]
-          ([yshift=-4.4cm]fig.north west) rectangle
-          ([xshift=-0.1cm, yshift=-0.1cm]fig.south east);
-        \node[red, font=\footnotesize\bfseries] at ([xshift=-3.2cm, yshift=-2.6cm]fig.north east)
-          {U-238, Th-234, Ra-226, Pb-214, Bi-214 (土壤)};
-        \node[red, font=\footnotesize\bfseries] at ([xshift=-3.0cm, yshift=-4.8cm]fig.north east)
-          {Pa-234m, U-235 (土壤)};
+          ([yshift=-4.6cm]fig.north west) rectangle
+          ([xshift=-1.7cm, yshift=2.1cm]fig.south east);
+        \draw[red, line width=1.8pt, rounded corners=4pt]
+          ([yshift=0.8cm]fig.south west) rectangle
+          ([xshift=-1.7cm, yshift=0.55cm]fig.south east);
       \end{tikzpicture}
     \end{column}
   \end{columns}

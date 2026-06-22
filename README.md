@@ -5,17 +5,6 @@ Long-term performance assessment of a radiological laboratory in IAEA Proficienc
 ## Project Structure
 
 ```
-├── paper/                          # LaTeX source for the academic paper
-│   ├── main.tex                    # Primary manuscript
-│   ├── refs.bib                    # Bibliography
-│   ├── figures/                    # All figures (PDF) used in paper and PPT
-│   └── statistical_results.json    # Inferential test outputs
-│
-├── ppt/                            # Beamer presentation (Chinese)
-│   ├── presentation.tex            # Slide source
-│   ├── template_img_png_*.png      # Background images
-│   └── samples.jpeg                # Sample photo
-│
 ├── 01_difficulty_pass_rate/        # Analysis 1: Difficulty coefficients & pass rates
 │   ├── plot_difficulty_pass_rate.py
 │   ├── difficulty_summary.csv
@@ -58,9 +47,7 @@ Long-term performance assessment of a radiological laboratory in IAEA Proficienc
 ├── merged_labcode_tables_2024/
 ├── merged_labcode_tables_2025/
 │
-├── IAEA结果分析/                    # Raw analysis output & deprecated scripts
-│   └── IAEA结果评价报告/            # IAEA official summary reports (PDF)
-│
+├── .gitignore
 ├── CLAUDE.md                       # Project-specific AI assistant guidelines
 └── README.md                       # This file
 ```
@@ -96,22 +83,9 @@ python 06_relative_bias/plot_relative_bias.py
 
 # Run statistical inference
 python utils/statistical_tests.py
-
-# Copy figures to paper/
-# (scripts output to their own folders; paper/figures/ is the unified target)
-
-# Compile the paper (requires LaTeX with natbib, booktabs, etc.)
-cd paper && pdflatex main && pdflatex main && pdflatex main
-
-# Compile the presentation (requires XeTeX + ctex)
-cd ppt && xelatex presentation.tex
 ```
 
 ## Data Source
 
 IAEA Terrestrial Environmental Radiochemistry Centre (TERC) proficiency test summary reports (2021–2025), available at:  
 https://analytical-reference-materials.iaea.org/previous-proficiency-tests
-
-## Companion Repository
-
-Code and processed data: https://github.com/yunlongli15/iaea-pt-analysis-2021-2025
