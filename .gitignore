@@ -9,9 +9,8 @@ ppt/
 .DS_Store
 __pycache__/
 
-# Deprecated analysis outputs
-IAEA结果分析/deprecated/
-IAEA结果分析/IAEA结果评价报告/
-IAEA结果分析/*.docx
-IAEA结果分析/*.pdf
-IAEA结果分析/**/*.png
+# Deprecated analysis outputs and documents
+IAEA结果分析/
+*.docx
+*.doc
+paper_cas/
